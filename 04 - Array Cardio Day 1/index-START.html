@@ -38,28 +38,59 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const fifteen = inventors.filter(item => (item.year >= 1500 && item.year<1600));
+    console.table(fifteen);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const fullName = inventors.map(item => (`${item.first} ${item.last}`));
+    console.table(fullName);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    let birthdate = inventors.slice()
+    const birthOrdered = birthdate.sort((a, b) => a.year - b.year);
+    console.table(birthOrdered)
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const totalYears = inventors.reduce((accumulator, current) => (accumulator + (current.passed - current.year)), 0);
+    console.log(totalYears);
 
     // 5. Sort the inventors by years lived
+    let livingYears = inventors.slice()
+    const livingOrdered = birthdate.sort((a, b) => (b.passed-b.year)-(a.passed-a.year));
+    console.table(livingOrdered)
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    /*
+    const category = document.querySelector('.mw-category');
+    const links = [...category.querySelectorAll('a')];
+    const de = links.map(item => item.textContent).filter(item => item.includes('de'));
+    */
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const sortName = people.sort((a, b) => {
+      const [aLast, aFirst] = a.split(', ');
+      const [bLast, bFirst] = b.split(', ');
+      return aLast.localeCompare(bLast);
+    });
+    console.log(sortName);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const totalData = data.reduce((accumulator, current) => {
+      if (!accumulator.hasOwnProperty(current)){
+        accumulator[current] = 0;
+      }
+      accumulator[current]++;
+      return accumulator;
+    }, {});
+
+  console.log(totalData);
 
   </script>
 </body>
